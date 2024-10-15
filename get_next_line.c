@@ -6,7 +6,7 @@
 /*   By: lfaria-m <lfaria-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:17:02 by lfaria-m          #+#    #+#             */
-/*   Updated: 2024/10/15 11:16:12 by lfaria-m         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:45:16 by lfaria-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ char	*get_next_line(int fd)
 
 	i = 0;
 
-	buffer = (char *) malloc(10);
-	result = (char *) malloc(999);
+
+	buffer = (char *) malloc(50);
+	result = (char *) malloc(10000);
 	if (!buffer)
 		return (0);
-	bytes_read = read(fd, buffer, 9);
-	
+	bytes_read = read(fd, buffer, 49);
 	buffer[bytes_read] = '\0';
-	while (buffer[i])
-		i ++;
+	while (bytes_read > 0 && !ft_strchr(buffer, '\n'))
+	{
+		ft_strlcat(result, buffer, ft_strlen(buffer));
+	}
 	
 	
-
-
-	return buffer + i;
+	return result;
 
 
 

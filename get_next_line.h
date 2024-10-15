@@ -6,7 +6,7 @@
 /*   By: lfaria-m <lfaria-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 10:13:14 by lfaria-m          #+#    #+#             */
-/*   Updated: 2024/10/15 10:18:10 by lfaria-m         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:40:14 by lfaria-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
  #include <unistd.h>
  char	*get_next_line(int fd);
+ size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
+ char	*ft_strchr(char *str, int c);
+ int	ft_strlen(char *str);
 
 
  #endif
