@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaria-m <lfaria-m@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 10:08:19 by lfaria-m          #+#    #+#             */
-/*   Updated: 2024/10/16 10:16:30 by lfaria-m         ###   ########.ch       */
+/*   Created: 2024/10/16 17:08:52 by lfaria-m          #+#    #+#             */
+/*   Updated: 2024/10/18 09:04:26 by lfaria-m         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,29 @@ char *update_stash(char *stash)
 	new_stash = ft_strdup(newline_pos + 1);
 	free(stash);
 	return (new_stash);
-
-	
 }
 
 char	*get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE];
+	char		buffer[1025];
 	static char	*stash;
 	char		*line;
 	ssize_t		bytes_read;
 
 	bytes_read = 1;
+	//if (!stash)
+		//stash = ft_strdup("");
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		buffer[bytes_read] = '\0';
+		stash = malloc(1025);
 		stash = ft_strjoin(stash, buffer);
 		if (ft_memchr(stash, '\n', ft_strlen(stash)))
 			break;
-		
 	}
+	if (bytes_read == 0 || bytes_read == -1)
+		return (0);
 	if (!stash || !*stash)
 			return (0);
 	line = get_line_from_stash(stash);
@@ -93,14 +95,20 @@ char	*get_next_line(int fd)
 int main()
 {
     int fd = open("readmebish.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error reading filename");
-		exit(1);
-	}
-	printf("%s", get_next_line(fd));
+    if (fd == -1)
+    {
+        perror("Error reading filename");
+        exit(1);
+    }
 
+    char *line;
+    // Keep calling get_next_line() until it returns NULL
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);  // Free the line after printing
+    }
 
-
+    close(fd);
     return 0;
 }
