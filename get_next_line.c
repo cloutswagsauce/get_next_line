@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaria-m <lfaria-m@student.42lausanne.ch>    +#+  +:+       +#+      */
+/*   By: lfaria-m <lfaria-m@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 19:42:36 by lfaria-m          #+#    #+#             */
-/*   Updated: 2024/10/21 19:45:06 by lfaria-m         ###   ########.ch       */
+/*   Created: 2024/10/22 10:01:50 by lfaria-m          #+#    #+#             */
+/*   Updated: 2024/10/22 10:03:01 by lfaria-m         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,3 +102,34 @@ char	*get_next_line(int fd)
 	stash = update_stash(stash);
 	return (line);
 }
+/*
+#include <fcntl.h> // for open()
+#include <stdio.h> // for printf()
+#include "get_next_line.h" // for get_next_line()
+
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	// Open a file. Replace "test.txt" with the path to your test file.
+	fd = open("readthis.txt", O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Error opening file.\n");
+		return (1);
+	}
+
+	// Read lines from the file using get_next_line.
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);  // Print the line (with or without a newline)
+		free(line);          // Remember to free the line after printing
+		line = get_next_line(fd);
+	}
+
+	// Close the file when done.
+	close(fd);
+	return (0);
+} */
